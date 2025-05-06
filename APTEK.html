@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FoodSave Dashboard</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+</head>
+<body class="bg-green-50 text-gray-800">
+  <!-- Navbar -->
+  <header class="bg-green-600 text-white p-4 shadow-md">
+    <div class="container mx-auto flex justify-between items-center">
+      <h1 class="text-2xl font-bold">FoodSave</h1>
+      <nav class="space-x-4">
+        <a href="#home" class="hover:underline">Beranda</a>
+        <a href="#donasi" class="hover:underline">Donasi</a>
+        <a href="#edukasi" class="hover:underline">Edukasi</a>
+        <a href="#komunitas" class="hover:underline">Komunitas</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section (Beranda) -->
+  <section id="home" class="relative bg-white">
+    <div class="absolute inset-0">
+      <img src="https://images.unsplash.com/photo-1600891964599-f61ba0e24092?auto=format&fit=crop&w=1500&q=80" alt="Food Background" class="w-full h-full object-cover opacity-20">
+    </div>
+    <div class="relative z-10 text-center p-16 max-w-3xl mx-auto">
+      <h2 class="text-5xl font-bold text-green-800 mb-6 drop-shadow">Kurangi Food Waste, Bantu Sesama</h2>
+      <p class="text-lg mb-6 text-gray-700">FoodSave menghubungkan makanan berlebih dengan mereka yang membutuhkan melalui platform digital yang mudah digunakan.</p>
+      <a href="#donasi" class="inline-block bg-green-600 text-white py-3 px-8 rounded-lg text-lg shadow hover:bg-green-700 transition duration-300">Mulai Donasi Sekarang</a>
+    </div>
+  </section>
+
+  <!-- Donasi Section -->
+  <section id="donasi" class="p-10 bg-green-100">
+    <h3 class="text-3xl font-bold mb-6">Donasi Makanan</h3>
+    <p class="mb-4">Masukkan informasi makanan berlebih Anda dan dapatkan notifikasi saat komunitas siap mengambilnya.</p>
+    <form class="bg-white p-6 rounded-lg shadow-md max-w-xl mx-auto">
+      <label class="block mb-2">Nama Makanan</label>
+      <input type="text" class="w-full mb-4 p-2 border rounded" placeholder="Contoh: Nasi Kotak 10 porsi"/>
+      <label class="block mb-2">Lokasi</label>
+      <input type="text" class="w-full mb-4 p-2 border rounded" placeholder="Alamat lengkap atau koordinat"/>
+      <label class="block mb-2">Keterangan</label>
+      <textarea class="w-full mb-4 p-2 border rounded" placeholder="Contoh: Makanan sisa acara, masih segar."></textarea>
+      <button class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">Kirim Donasi</button>
+    </form>
+  </section>
+
+  <!-- Komunitas Section -->
+  <section id="komunitas" class="p-10 bg-green-100">
+    <h3 class="text-3xl font-bold mb-6">Komunitas Sosial Mitra</h3>
+    <p class="mb-6">Bekerja sama dengan panti asuhan, lembaga sosial, dan relawan untuk mendistribusikan makanan berlebih secara adil.</p>
+    <ul class="grid md:grid-cols-3 gap-4">
+      <li class="bg-white p-4 rounded shadow">
+        <h4 class="font-semibold">Panti Asuhan Kasih</h4>
+        <p>Jakarta Selatan</p>
+      </li>
+      <li class="bg-white p-4 rounded shadow">
+        <h4 class="font-semibold">Komunitas FoodBank ID</h4>
+        <p>Bandung</p>
+      </li>
+      <li class="bg-white p-4 rounded shadow">
+        <h4 class="font-semibold">Aksi Cepat Tanggap</h4>
+        <p>Surabaya</p>
+      </li>
+    </ul>
+  </section>
+
+  <!-- Statistik Section -->
+  <section id="statistik" class="p-10 bg-green-100">
+    <h3 class="text-3xl font-bold mb-6">Statistik Donasi</h3>
+    <div class="grid md:grid-cols-3 gap-6 text-center">
+      <div class="bg-green-100 p-6 rounded-lg shadow">
+        <p class="text-4xl font-bold text-green-700" id="donasiCount">0</p>
+        <p class="mt-2">Donasi Terkumpul</p>
+      </div>
+      <div class="bg-green-100 p-6 rounded-lg shadow">
+        <p class="text-4xl font-bold text-green-700" id="penerimaCount">0</p>
+        <p class="mt-2">Penerima Manfaat</p>
+      </div>
+      <div class="bg-green-100 p-6 rounded-lg shadow">
+        <p class="text-4xl font-bold text-green-700" id="mitraCount">0</p>
+        <p class="mt-2">Mitra Komunitas</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="bg-green-600 text-white text-center p-4">
+    <p>&copy; 2025 FoodSave. Semua Hak Dilindungi.</p>
+  </footer>
+
+  <!-- Statistik Counter Animation -->
+  <script>
+    function animateValue(id, start, end, duration) {
+      const obj = document.getElementById(id);
+      let startTimestamp = null;
+      const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        obj.innerText = Math.floor(progress * (end - start) + start).toLocaleString();
+        if (progress < 1) {
+          window.requestAnimationFrame(step);
+        }
+      };
+      window.requestAnimationFrame(step);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      animateValue("donasiCount", 0, 1250, 1500);
+      animateValue("penerimaCount", 0, 3800, 1500);
+      animateValue("mitraCount", 0, 50, 1500);
+    });
+  </script>
+</body>
+</html>
